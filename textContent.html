@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>textContent랑innerText랑innerHTML차이</title>
+    <style>
+        input {
+            margin-top:20px;
+            width:150px;
+            height:50px;
+            background-color:bisque;
+            border:5px solid plum;
+        }
+        .margin {margin-top:30px;}
+        mark.color {background-color:plum;}
+    </style>
+</head>
+<body>
+    <div id="qq">안녕하세요         반가워요? 
+        <span style='display:none'>숨겨진 텍스트</span>
+    </div>
+    <input type="button" value="innerHTML" onclick="a()">
+    <input type="button" value="innerText" onclick="b()">
+    <input type="button" value="contentText" onclick="c()">
+    <div class="margin"><mark>innerHTML:</mark><br>
+        'Element'의 속성으로, 해당 Element의 HTML, XML을 읽어오거나, 설정할 수 있습니다.
+        div안에 있는 HTML 전체 내용을 가져온다.
+    </div>
+    <div class="margin"><mark>innerText:</mark><br>
+        'Element'의 속성으로, 해당 Element 내에서 사용자에게 '보여지는' 텍스트 값을 읽어옵니다.
+    </div>
+    <div class="margin"><mark>textContent:</mark><br>
+        'Node'의 속성으로,
+        innetText와는 달리 script나 style 태그와 상관없이
+        해상 노드가 가지고 있는 텍스트 값을 그대로 읽습니다.
+    </div>
+    <div style="margin-top:20px; line-height:40px">
+        <mark class="color">
+            innerText와의 차이점<br>
+        </mark>
+        출처 MDN<br>
+        비록 Node.textContent와 HTMLElement.innerText의 이름이 유사하긴 하지만, 중요한 차이가 있으므로 헷갈리지 마세요.<br>
+
+        textContent는 script와 style 요소를 포함한 모든 요소의 콘텐츠를 가져옵니다. <br>
+        반면 innerText는 "사람이 읽을 수 있는" 요소만 처리합니다.<br>
+        textContent는 노드의 모든 요소를 반환합니다.<br>
+        그에 비해 innerText는 스타일링을 고려하며, "숨겨진" 요소의 텍스트는 반환하지 않습니다.<br>
+        또한, innerText의 CSS 고려로 인해, innerText 값을 읽으면 최신 계산값을 반영하기 위해 리플로우가 발생합니다. (리플로우 계산은 비싸므로 가능하면 피해야 합니다)<br>
+        Internet Explorer 기준, innerText를 수정하면 요소의 모든 자식 노드를 제거하고, 모든 자손 텍스트 노드를 영구히 파괴합니다.<br>
+        이로 인해, 해당 텍스트 노드를 이후에 다른 노드는 물론 같은 노드에 삽입하는 것도 불가능합니다.<br>
+        innerHTML과의 차이점
+        Element.innerHTML는 이름 그대로 HTML을 반환합니다.<br>
+        간혹 innerHTML을 사용해 요소의 텍스트를 가져오거나 쓰는 경우가 있지만, HTML로 분석할 필요가 없다는 점에서 textContent의 성능이 더 좋습니다.
+
+        이에 더해, textContent는 XSS 공격의 위험이 없습니다.
+    </div>
+
+    <script>
+        const element = document.getElementById('qq');
+
+        function a() {
+            alert(element.innerHTML);
+        } 
+        function b() {
+            alert(element.innerText);
+        } 
+
+        function c() {
+            alert(element.textContent);
+        } 
+    </script>
+</body>
+</html>
