@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS로 박스 position, height 조정하기</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        body {
+            overflow-x:hidden;
+            background: linear-gradient(0, rgba(255,0,189,0.6671043417366946) 24%, rgba(129,129,189,1) 55%, rgba(60,255,95,1) 100%);
+            height:5000px;
+        }
+        div {
+            position: absolute;
+            left:50%;
+            width:50vw;
+            height:100px;
+            border:2px solid #000;
+            background:#fff;
+            transform:translateX(-50%);
+        }
+        div p {
+            font-size:30px;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>자바스크립트로 박스의 위치 조정하기</p>
+    </div>
+
+    <script>
+        const box = document.querySelector('div');
+        // console.log(box);
+
+        function play() {
+            let yOffset = window.pageYOffset;
+            let height = parseInt(box.style.height);
+            // console.log(yOffset);
+            box.style.top = `${yOffset+20}px`
+            box.style.height = 100 + 'px';
+            if (yOffset > 2000) {
+                box.style.top = `${yOffset+40}px`
+                box.style.height = `${yOffset-1900}px`
+                if (yOffset > 2700 ) {
+                    box.style.height = 800 + 'px';
+                }
+            } else if (yOffset < 2000) {
+                box.style.height = 100 + 'px';
+            }
+        }
+        window.addEventListener('scroll', play);
+        
+    </script>
+</body>
+</html>
