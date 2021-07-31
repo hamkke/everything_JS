@@ -85,7 +85,7 @@
         return student.score === 90;
     });
 
-    // 축양형 - const result = student.find((student) => student.score === 90 );
+    // 축약형 - const result = student.find((student) => student.score === 90 );
     console.log(result);
 }
 
@@ -173,3 +173,110 @@
     });
     console.log(result2); // false나옴
 }
+
+// Q.9 compute students's average score
+// 계산하다 학생들의 평군 점수
+{
+    class Student {
+        constructor(name, age, enrolled, score) {
+            this.name = name;
+            this.age = age;
+            this.enrolled = enrolled;
+            this.score = score;
+        }
+    }
+    const student = [
+        new Student('A', 29, true, 45), 
+        new Student('B', 28, false, 80),
+        new Student('C', 30, true, 90), 
+        new Student('D', 40, false, 66),
+        new Student('E', 18, true, 88)
+    ]
+
+    // reduce(callbackfn: (previousValue: T, currentValue: T, currentIndex: number, array: T[]) => T): T;
+    // reduce(callbackfn: (previousValue: T, currentValue: T, currentIndex: number, array: T[]) => T, initialValue: T): T;
+    const result = student.reduce((prev, curr) => { // redueRight도 있는데 얘는 뒤부터 시작
+        // console.log(prev); // return을 안해주면 첫번째는 나오지만 두번째부터는 undefined가 나온다
+        // console.log(curr);
+        return prev + curr.score; // *return되는 값은 위에 prev한테 간다*
+    }, 0);
+    console.log('문제9번', result / student.length);
+
+
+    const result2 = student.reduceRight((prev, curr) => { // redueRight도 있는데 얘는 뒤부터 시작
+        console.log(prev); // return을 안해주면 첫번째는 나오지만 두번째부터는 undefined가 나온다
+        console.log(curr);
+        return prev + curr.score; // *return되는 값은 위에 prev한테 간다*
+    }, 0); // 0을 안쓰면 [object Object]66908045 이렇게 나오고, 1이라 쓰면 1부터 시작
+    console.log('문제9번', result2);
+}
+
+// Q.10 make a string containing all the scores
+// result should be: '45, 80, 90, 66, 88'
+// 만들어라 문자열 포함한 모든 점수를
+{
+    class Student {
+        constructor(name, age, enrolled, score) {
+            this.name = name;
+            this.age = age;
+            this.enrolled = enrolled;
+            this.score = score;
+        }
+    }
+    const student = [
+        new Student('A', 29, true, 45), 
+        new Student('B', 28, false, 80),
+        new Student('C', 30, true, 90), 
+        new Student('D', 40, false, 66),
+        new Student('E', 18, true, 88)
+    ]
+    
+    const result = student.map((student) => {
+        return student.score;
+    });
+    console.log('문제10번', result); // (5) [45, 80, 90, 66, 88]
+
+    const result2 = student.map((student) => {
+        return student.score;
+    }).join(); 
+    console.log('문제10번', result2); // //문제10번 45,80,90,66,88
+
+    const result3 = student.map((student) => {
+        return student.score;
+    }).filter((score) => score >= 50).join();
+    console.log('문제10번', result3); // 50점 이상인 점수만 출력
+
+    // 축약형
+    // const result4 = student.map((student) => student.score).filter((score) => score >= 50).join();
+    // console.log('문제10번', result4);
+}
+
+// Q.bonus sorted in ascending order
+// result should be: ''45, 66, 80, 88, 90
+{
+    class Student {
+        constructor(name, age, enrolled, score) {
+            this.name = name;
+            this.age = age;
+            this.enrolled = enrolled;
+            this.score = score;
+        }
+    }
+    const student = [
+        new Student('A', 29, true, 45), 
+        new Student('B', 28, false, 80),
+        new Student('C', 30, true, 90), 
+        new Student('D', 40, false, 66),
+        new Student('E', 18, true, 88)
+    ]
+
+    const result = student.map(student => student.score)
+    .sort((a,b) => a-b).join();
+    console.log(result);
+}
+
+const a = [5, 8, 88, 61];
+const xxx = a.sort((b,a) => b-a);
+console.log(xxx); // [5, 8, 61, 88]
+
+    
