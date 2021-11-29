@@ -1,0 +1,70 @@
+21.07.28 오늘의 공부 *git*
+
+
+터미널또는 어플리케이션(sourcetree, gitkraken등등이 있다)으로 조작하기
+깃은 명령어 프로그램, 터미널에서 커맨드로 배워야 제대로 배울 수 있다
+
+Command-line interface 명령 줄 인터페이스 = CLI
+
+터미널을 써야 진정한 개발자?  깃을 얼마나 잘 이해하고 사용하는지가 중요하다
+
+git --version -버전 알아보기
+git config --list -모든 설정을 확인 할 수 있다
+git config --global -e -설정 내용 에디터로 보기
+git config --global core.editor "code" 엔터 후 code . 을 치면 텍스트 에디터가 열림
+
+내가 열고 싶은 폴더로 경로 이동 후 code .을 치면 그 파일들이 에디터로 열림 완전싱기
+
+원하는 경로 주소를 모를 땐 바탕화면에 폴더 만들어서 속성에서 복붙하면 된다
+
+
+하나. 폴더(Folder)
+
+폴더(folder)는 GUI, 즉 그래픽 사용자 인터페이스를 사용하는 운영체제에서 파일을 관리하는데 사용하는 디렉토리를 의미합니다.
+
+둘. 디렉토리(Directory)
+
+디렉토리는 폴더와 함께 가장 많이 쓰이는 용어입니다. 폴더가 GUI의 운영체제에서만 의미한다면 디렉토리는 좀 더 포괄적인 의미를 갖는다고 볼 수 있죠.
+
+셋. 패스(Path)
+
+패스가 초기부터 디렉토리나 폴더와 같은 의미로 쓰이지는 않았지만 시간이 지나면서 어떤 파일이 위치한 곳에 이르기까지의 길을 가리키면서 점점 같은 의미로 쓰이게 되었다 볼 수 있습니다.
+
+
+
+디렉토리 폴더생성 mkdir  make directory
+디렉토리 삭제 rmdir remove directory
+rm 삭제
+cd 경로 이동
+cd.. 상위 폴더로 이동
+
+
+git init -해당 폴더에 .git이라는 비어있는 git저장소 생성
+git clone url주소
+git push origin main 
+origin은 뜻이 있는 명령어가 아니라 원격저장소 이름, 그래서 바꿔도 무상관 하지만 처음 만들때는 그렇게 짓기로 약속
+main도 명령어가 아니라 브랜치명
+
+git branch -브랜치명 브랜치 만들기
+git checkout -브랜치명 브랜치 바꾸기
+
+ex) main과 new라는 브랜치가 있음
+
+내가 클론을 했음 그러면 main이라는 애는 그냥 따라옴
+만약 new브랜치를 가지고 오고 싶으면 git checkout -b new origin/new 이렇게 명령
+
+git branch -a -로컬, 원격에 있는 모든 브랜치를 볼 수 있다 그런데 안나온다?
+git fetch를 -명령 그 다음 다시 
+git branch -a
+
+
+merge를 하고 싶다면, 지금 나는 main브랜치이고 git merge new
+
+git branch -D new -로컬에서 new브랜치 삭제
+git push -d origin new -원격에서 new브랜치 삭제
+
+
+
+
+
+

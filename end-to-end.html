@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>끝말잇기</title>
+</head>
+<body>
+    <div>
+        <span id="order">1</span>
+    번 째 참가자</div>
+    <div>제시어: 
+        <span id="word"></span>
+    </div>
+    <input type="text">
+    <button>입력</button>
+
+    <script>
+        const number = parseInt(prompt('몇 명이 참가하나요?'), 10);
+        // alert(number);
+        // const yesOrNo = confirm('맞나요?');
+        /*
+        프롬프트창에 입력된 값은 문자열임 그래서 parseInt이용해 
+        숫자로 체인지,뒤에 10은 10진법이라고 알려줄려고 쓰는거, 
+        기본적으로 10진법이라 안써도 되지만 그냥 쓰기
+        */
+        const $button = document.querySelector('button');
+        const $input = document.querySelector('input');
+        /*$input.addEventListener('input', (event) => {
+           console.log(123, event.target.value); 
+        }); 사용자가 input창에 입력한 값이 출력된다
+        $button.addEventListener('click', function(){
+           console.log(456); 
+        });
+        */ 
+        const $word = document.querySelector('#word');
+        const $order = document.querySelector('#order');
+        let word; //제시어 저장할 변수
+        let newWord; // 새로 입력한 단어
+
+        const onClick = () => {
+            if(!word) { //제시어가 비어 있는가?
+                //비어 있다.
+                word = newWord; // 입력한 단어가 제시어가 된다.
+                $word.textContent = word; // 인풋창에 입력한 단어를 화면에 표시
+                const order = Number($order.textContent); // 현재순서
+                if(order +1 > number) { // order +1 > number = order === number
+                    $order.textContent = 1;
+                } else {
+                    $order.textContent = order + 1;
+                }
+                $input.value = ''; // 인풋창에 전 사람이 입력한 값 지워주기
+                $input.focus();
+            } else { 
+                //비어 있지 않다.
+                if(word[word.length - 1] === newWord[0]) { // 올바른가?
+                    word = newWord;
+                    $word.textContent = word;
+                    const order = Number($order.textContent); // 현재순서
+                    if(order +1 > number) {
+                        $order.textContent = 1; 
+                    } else {
+                        $order.textContent = order + 1;
+                    }
+                    /*왜 똑같이 추가 되었냐면 순서도를 보면 제시어를 보고 다음사람이 단어를 입력하고 맞다면
+                    그 다다음 순서가 표시 되야 하기 때문*/
+                    $input.value = ''; 
+                    $input.focus();
+                } else { // 올바르지 않은가?
+                    alert('틀렸엉');
+                    $input.value = ''; 
+                    $input.focus();
+                }
+            }
+        };
+        const onInput = (event) => {
+         newWord = event.target.value;
+        };
+
+        $button.addEventListener('click', onClick);
+        $input.addEventListener('input', onInput);
+    </script>
+</body>
+</html>
